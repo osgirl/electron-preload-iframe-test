@@ -1,5 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, session} = require('electron')
+
+const url = require('url');
+const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -7,10 +10,26 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 800, height: 600,
+  webPreferences: {
+    preload: path.join(__dirname, 'preload.js'),
+    sandbox: true, // these also don't make a diffrence, but we do need it to work with sandbox
+    nodeIntegration: false
+  }})
 
+  indexPath = url.format({
+    protocol: 'file:',
+    pathname: path.join(__dirname, 'static', 'main.html'),
+    slashes: true
+  });
+
+  // session.defaultSession.setPreloads([path.join(__dirname, 'preload.js')]) // doesn't make a difference
+
+
+
+  mainWindow.openDevTools()
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadURL(indexPath)
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

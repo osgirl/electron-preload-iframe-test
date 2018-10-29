@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "node",
+            "protocol": "inspector",
+            "request": "launch",
+            "program": "${workspaceRoot}/main.js",
+            "env": {
+                // "PORT": "8083"
+                // "DEV_USE_LOCAL_EXT_PROXY": "true"
+            },
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+            "runtimeArgs": [
+                ".",
+                // "--enable-sandbox",
+                // "--enable-logging",
+                "--disable-gpu"
+            ],
+            // "console": "integratedTerminal",
+            "outputCapture": "std",
+            "sourceMaps": false
+        },
+    ]
+}
